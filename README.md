@@ -3,7 +3,7 @@ A Python tool for analyzing commits in smart contract repositories to study gas 
 
 ## Requirements
 
-- Docker and Docker Compose installed on your system  
+- Docker and Docker Compose installed on your system
 - A GitHub Personal Access Token (Fine-grained PAT) with read access to public repositories
 
 ## Setup
@@ -40,5 +40,5 @@ output/solidity_repositories.csv
 
 ## Cross-platform compatibility
 
-- This setup works on **Linux, macOS, and Windows**.  
-- On Windows, ensure the project folder is shared with Docker Desktop so the `output` volume is mounted correctly.  
+- This setup works on **Linux, macOS, and Windows**.
+- On Windows, ensure the project folder is shared with Docker Desktop so the `output` volume is mounted correctly.
