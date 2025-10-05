@@ -1,4 +1,4 @@
-# smart-contract-gas-analyzer
+# Smart-contract-gas-analyzer
 A Python tool for analyzing commits in smart contract repositories to study gas optimizations and code evolution.
 
 ## Requirements
@@ -14,11 +14,7 @@ A Python tool for analyzing commits in smart contract repositories to study gas 
    GITHUB_TOKEN=your_github_token_here
    ```
 
-2. Create an output folder:
-
-   ```bash
-   mkdir -p output
-   ```
+> Note: The `.env` file should not contain real credentials if you are sharing the project. Use `.env.example` as a template.
 
 ## Run with Docker Compose
 
@@ -34,12 +30,6 @@ If you make changes to the code and want to rebuild the image:
 docker compose build --no-cache
 ```
 
-This will:
-- Build the image automatically if it does not exist  
-- Load environment variables from `.env`  
-- Mount the `output` directory to store the results  
-- Run the analysis script inside the container  
-
 ## Output
 
 After execution, the results will be saved in:
@@ -47,3 +37,8 @@ After execution, the results will be saved in:
 ```
 output/solidity_repositories.csv
 ```
+
+## Cross-platform compatibility
+
+- This setup works on **Linux, macOS, and Windows**.  
+- On Windows, ensure the project folder is shared with Docker Desktop so the `output` volume is mounted correctly.  
