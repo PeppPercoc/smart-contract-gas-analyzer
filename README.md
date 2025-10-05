@@ -21,14 +21,10 @@ A Python tool for analyzing commits in smart contract repositories to study gas 
 Simply build and run the container using:
 
 ```bash
-docker compose up
+docker compose run --rm analyzer
 ```
 
-If you make changes to the code and want to rebuild the image:
-
-```bash
-docker compose build --no-cache
-```
+If you make changes to the code and want to reconstruct the image you must delete the existing one and recreate it
 
 ## Output
 
