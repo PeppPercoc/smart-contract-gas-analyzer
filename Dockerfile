@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "find_repo-GPT.py"]
+CMD ["python", "find_repo.py"]
