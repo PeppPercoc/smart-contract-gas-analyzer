@@ -35,6 +35,17 @@ def get_commit_count(full_name):
             last_page = part[:end]
             return int(last_page)
 
+def get_contributors_count(full_name):
+    url = f"https://api.github.com/repos/{full_name}/contributors?per_page=1&anon=true"
+    response = requests.get(url, headers=HEADERS)
+    link=response.headers.get("link",[])
+    pos = link.rfind("page=")
+    if pos != -1:
+        part = link[pos + 5:]
+        end = part.find(">")
+        if end != -1:
+            last_page = part[:end]
+            return int(last_page)
 
 def main():
     star="10"
@@ -43,16 +54,16 @@ def main():
     archived="false"
     query="stars:>"+star+" language:"+language+" created:>"+created+" archived:"+archived
     repos=search_repository(query)
-    fieldnames = list(repos[0].keys())+["commit_count"]
+    fieldnames = list(repos[0].keys())+["commit_count"]+["contributors_count"]
     with open("output/repos.csv", "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for repo in repos:
             full_name=repo["full_name"]
             commit = get_commit_count(full_name)
-            print(type(commit))
-            print(commit)
+            contributors = get_contributors_count(full_name)
             repo["commit_count"] = commit
+            repo["contributors_count"]= contributors
             writer.writerow(repo)
 
 if __name__ == "__main__":
