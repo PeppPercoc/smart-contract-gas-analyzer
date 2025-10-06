@@ -1,4 +1,5 @@
 import os
+import csv
 import requests
 from dotenv import load_dotenv
 
@@ -31,6 +32,11 @@ def main():
     query="stars:>"+star+" language:"+language+" created:>"+created+" archived:"+archived
     repos=search_repository(query)
     print(repos)
+    fieldnames = repos[0].keys()
+    with open("output/repos.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(repos)
 
 if __name__ == "__main__":
     main()
