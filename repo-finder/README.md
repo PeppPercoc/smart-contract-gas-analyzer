@@ -1,5 +1,6 @@
-# Smart-contract-gas-analyzer
-A Python tool for analyzing commits in smart contract repositories to study gas optimizations and code evolution.
+# repo-finder
+
+This module searches for public GitHub repositories containing Solidity smart contracts, collects relevant metadata (stars, forks, commits, etc.), and exports the results to a CSV file for further analysis.
 
 ## Requirements
 
