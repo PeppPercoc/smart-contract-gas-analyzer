@@ -1,6 +1,7 @@
 import os
 import csv
 import requests
+from tqdm import tqdm
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -62,7 +63,7 @@ def main():
     with open("output/repos.csv", "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        for repo in repos:
+        for repo in tqdm(repos):
             full_name=repo["full_name"]
             commits = get_commits_count(full_name)
             contributors = get_contributors_count(full_name)
