@@ -14,7 +14,7 @@ HEADERS = {"Authorization": f"token {GITHUB_TOKEN}"}
 def search_repository(query):
     repos=[]
     per_page=50
-    max_pages=1 #20*50=1000 numero massimo richieste
+    max_pages=20 #20*50=1000 numero massimo richieste
     for page in range(1,max_pages+1):
         url = f"https://api.github.com/search/repositories?q={query}&sort=stars&order=desc&per_page={per_page}&page={page}"
         response = requests.get(url, headers=HEADERS)
@@ -55,9 +55,10 @@ def get_contributors_count(full_name):
 def main():
     star="9"
     language="Solidity"
-    created="2019-01-01"
+    created_from="2025-01-01"
+    created_to="2025-10-14"
     archived="false"
-    query="stars:>"+star+" language:"+language+" created:>"+created+" archived:"+archived
+    query="stars:>"+star+" language:"+language+" created:"+created_from+".."+created_to+" archived:"+archived
     repos=search_repository(query)
     fieldnames = list(repos[0].keys())+["commits_count"]+["contributors_count"]
     with open("output/repos.csv", "w", newline="", encoding="utf-8") as csvfile:
@@ -65,9 +66,12 @@ def main():
         writer.writeheader()
         for repo in tqdm(repos):
             full_name=repo["full_name"]
+            tqdm.write(full_name)
             commits = get_commits_count(full_name)
+            tqdm.write(str(commits))
             contributors = get_contributors_count(full_name)
-            if 50 < commits < 300 and contributors > 4:
+            tqdm.write(str(contributors))
+            if 50 < commits < 5000 and contributors > 4:
                 repo["commits_count"] = commits
                 repo["contributors_count"]= contributors
                 writer.writerow(repo)
